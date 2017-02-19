@@ -6,11 +6,11 @@ defmodule Arc.Processor do
 
   defp apply_transformation(file, :noaction), do: {:ok, file}
   defp apply_transformation(file, {:noaction}), do: {:ok, file} # Deprecated
-  defp apply_transformation(file, {cmd, conversion, _}) do
-    apply_transformation(file, {cmd, conversion})
-  end
 
   defp apply_transformation(file, {cmd, conversion}) do
     Arc.Transformations.Convert.apply(cmd, Arc.File.ensure_path(file), conversion)
+  end
+  defp apply_transformation(file, {cmd, conversion, output_ext}) do
+    Arc.Transformations.Convert.apply(cmd, Arc.File.ensure_path(file), conversion, output_ext)
   end
 end
