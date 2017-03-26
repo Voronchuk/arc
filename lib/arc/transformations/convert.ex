@@ -7,6 +7,10 @@ defmodule Arc.Transformations.Convert do
     new_path = Arc.File.generate_temporary_path(file) <> ".png"
     apply(cmd, file, args, new_path)
   end
+  def apply(cmd, file, args, :jpg) do
+    new_path = Arc.File.generate_temporary_path(file) <> ".jpg"
+    apply(cmd, file, args, new_path)
+  end
   def apply(cmd, file, args, new_path) do
     args     = if is_function(args), do: args.(file.path, new_path), else: [file.path | (String.split(args, " ") ++ [new_path])]
     program  = to_string(cmd)
